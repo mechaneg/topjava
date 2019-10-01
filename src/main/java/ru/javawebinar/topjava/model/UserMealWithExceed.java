@@ -5,16 +5,8 @@ import java.time.LocalDateTime;
 public class UserMealWithExceed {
     private final LocalDateTime dateTime;
 
-    public LocalDateTime getDateTime() {
-        return dateTime;
-    }
-
     public String getDescription() {
         return description;
-    }
-
-    public int getCalories() {
-        return calories;
     }
 
     public boolean isExceed() {

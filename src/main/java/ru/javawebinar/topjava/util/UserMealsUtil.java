@@ -30,7 +30,7 @@ public class UserMealsUtil {
 
         for (FilterWithExceededMethod method : methods) {
             List<UserMealWithExceed> result = method.apply(
-                    mealList, LocalTime.of(7, 0), LocalTime.of(12, 0),2000
+                    mealList, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000
             );
 
             assert result.size() == 2;

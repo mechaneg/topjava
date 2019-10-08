@@ -16,7 +16,7 @@ public class MealTo {
         this.excess = excess;
     }
 
-    public Boolean getExcess() {
+    public Boolean isExcess() {
         return excess;
     }
 

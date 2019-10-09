@@ -31,10 +31,10 @@
         <th>Калории</th>
     </tr>
     <c:forEach items="${mealsList}" var="meal">
-        <tr style="color: ${meal.excess == true ? "red" : "green"}">
-            <td>${meal.dateTime.toString().replace('T', ' ')}</td>
-            <td>${meal.description}</td>
-            <td>${meal.calories}</td>
+        <tr style="color: ${meal.isExcess() ? "red" : "green"}">
+            <td>${meal.getDateTime().toString().replace('T', ' ')}</td>
+            <td>${meal.getDescription()}</td>
+            <td>${meal.getCalories()}</td>
         </tr>
     </c:forEach>
 </table>

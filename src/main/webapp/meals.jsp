@@ -11,18 +11,7 @@
 <h2>Meals</h2>
 </body>
 
-<style>
-    table {
-        font-family: arial, sans-serif;
-        border-collapse: collapse;
-    }
-
-    td, th {
-        border: 1px solid darkgrey;
-        text-align: left;
-        padding: 8px;
-    }
-</style>
+<link rel="stylesheet" type="text/css" href="meals.css">
 
 <table>
     <tr>

@@ -1,13 +1,17 @@
 package ru.javawebinar.topjava.repository.inmemory;
 
+import org.springframework.stereotype.Repository;
 import ru.javawebinar.topjava.model.Meal;
+import ru.javawebinar.topjava.model.TimeFilter;
 import ru.javawebinar.topjava.repository.MealRepository;
+import ru.javawebinar.topjava.util.DateTimeUtil;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
+@Repository
 public class InMemoryMealRepository implements MealRepository {
 
     private class MealWithUid {
@@ -80,10 +84,29 @@ public class InMemoryMealRepository implements MealRepository {
 
     @Override
     public Collection<Meal> getAll(int userId) {
+        return getFiltered(userId, new TimeFilter());
+    }
+
+    @Override
+    public Collection<Meal> getFiltered(int userId, TimeFilter timeFilter) {
         return repository
                 .values()
                 .stream()
                 .filter(mealWithUid -> mealWithUid.getUid() == userId)
+                .filter(
+                        mealWithUid -> DateTimeUtil.isBetween(
+                            mealWithUid.getMeal().getDate(),
+                            timeFilter.getFromDate(),
+                            timeFilter.getToDate()
+                        )
+                )
+                .filter(
+                        mealWithUid -> DateTimeUtil.isBetween(
+                            mealWithUid.getMeal().getTime(),
+                            timeFilter.getFromTime(),
+                            timeFilter.getToTime()
+                        )
+                )
                 .map(MealWithUid::getMeal)
                 .sorted(Comparator.comparing(Meal::getDate).reversed().thenComparing(Meal::getId))
                 .collect(Collectors.toList());

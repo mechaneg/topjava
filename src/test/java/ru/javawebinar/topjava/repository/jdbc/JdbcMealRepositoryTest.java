@@ -34,7 +34,7 @@ public class JdbcMealRepositoryTest {
         }
         {
             // updating existing meal
-            Meal meal = MealTestData.MEAL_1;
+            Meal meal = new Meal(MealTestData.MEAL_1);
             meal.setCalories(30000);
             Meal updatedMeal = repository.save(new Meal(meal), UserTestData.USER_ID);
             MealTestData.assertMatchWithoutIds(meal, updatedMeal);

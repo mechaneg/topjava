@@ -20,12 +20,12 @@ public class MealTestData {
     public static final Meal MEAL_1 = new Meal(MEAL_1_ID, LocalDateTime.of(2019, 6, 6, 8, 0, 0), "kashki bahnul", 500);
     public static final Meal MEAL_2 = new Meal(MEAL_2_ID, LocalDateTime.of(2019, 6, 6, 13, 0, 0), "supchik", 1500);
     public static final Meal MEAL_3 = new Meal(MEAL_3_ID, LocalDateTime.of(2019, 6, 6, 19, 0, 0), "burgerok", 2500);
-    public static final Meal MEAL_4 = new Meal(MEAL_4_ID, LocalDateTime.of(2019, 6, 6, 8, 0, 0), "kashki bahnul", 500);
-    public static final Meal MEAL_5 = new Meal(MEAL_5_ID, LocalDateTime.of(2019, 6, 6, 15, 1, 0), "mars", 300);
-    public static final Meal MEAL_6 = new Meal(MEAL_6_ID, LocalDateTime.of(2019, 6, 6, 15, 2, 0), "bounty", 300);
+    public static final Meal MEAL_4 = new Meal(MEAL_4_ID, LocalDateTime.of(2019, 6, 7, 0, 0, 0), "kashki bahnul", 500);
+    public static final Meal MEAL_5 = new Meal(MEAL_5_ID, LocalDateTime.of(2019, 6, 7, 15, 1, 0), "mars", 300);
+    public static final Meal MEAL_6 = new Meal(MEAL_6_ID, LocalDateTime.of(2019, 6, 7, 15, 2, 0), "bounty", 300);
 
     public static void assertMatch(Meal actual, Meal expected) {
-        assertThat(actual).isEqualTo(expected);
+        assertThat(actual).isEqualToComparingFieldByField(expected);
     }
 
     public static void assertMatchWithoutIds(Meal actual, Meal expected) {

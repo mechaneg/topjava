@@ -28,10 +28,6 @@ public class MealTestData {
         assertThat(actual).isEqualToComparingFieldByField(expected);
     }
 
-    public static void assertMatchWithoutIds(Meal actual, Meal expected) {
-        assertThat(actual).isEqualToIgnoringGivenFields(expected, "id");
-    }
-
     public static void assertMatch(Iterable<Meal> actual, Meal... expected) {
         assertMatch(actual, Arrays.asList(expected));
     }

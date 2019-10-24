@@ -22,7 +22,6 @@ import static org.junit.Assert.*;
 
 @ContextConfiguration({
         "classpath:spring/spring-app.xml",
-        "classpath:spring/spring-repository.xml",
         "classpath:spring/spring-db.xml"
 })
 @RunWith(SpringRunner.class)
@@ -46,14 +45,12 @@ public class MealServiceTest {
 
     @Test(expected = NotFoundException.class)
     public void getNonExistingMeal() {
-        Meal meal = service.get(MealTestData.NON_EXISTING_MEAL_ID, UserTestData.USER_ID);
-        MealTestData.assertMatch(MealTestData.MEAL_1, meal);
+        service.get(MealTestData.NON_EXISTING_MEAL_ID, UserTestData.USER_ID);
     }
 
     @Test(expected = NotFoundException.class)
     public void getByWrongUser() {
-        Meal meal = service.get(MealTestData.MEAL_1_ID, UserTestData.OTHER_USER_ID);
-        MealTestData.assertMatch(MealTestData.MEAL_1, meal);
+        service.get(MealTestData.MEAL_1_ID, UserTestData.OTHER_USER_ID);
     }
 
     @Test
@@ -121,7 +118,7 @@ public class MealServiceTest {
     public void create() {
         Meal newMeal = new Meal(LocalDateTime.now(), "huge pizza", 3000);
         Meal savedMeal = service.create(newMeal, UserTestData.USER_ID);
-        MealTestData.assertMatchWithoutIds(newMeal, savedMeal);
+        MealTestData.assertMatch(newMeal, savedMeal);
     }
 
     @Test(expected = DataAccessException.class)

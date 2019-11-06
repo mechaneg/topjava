@@ -15,10 +15,12 @@ import static ru.javawebinar.topjava.util.DateTimeUtil.*;
 @Repository
 public class DataJpaMealRepository implements MealRepository {
 
-    private final CrudMealRepository crudRepository;
+    private final CrudMealRepository mealRepo;
+    private final CrudUserRepository userRepo;
 
-    public DataJpaMealRepository(CrudMealRepository crudRepository) {
-        this.crudRepository = crudRepository;
+    public DataJpaMealRepository(CrudMealRepository mealRepo, CrudUserRepository userRepo) {
+        this.mealRepo = mealRepo;
+        this.userRepo = userRepo;
     }
 
     @Override
@@ -28,31 +30,30 @@ public class DataJpaMealRepository implements MealRepository {
             return null;
         }
 
-        // Fake user with proper userId
-        User user = new User(userId, null, null, null, Role.ROLE_USER);
+        User user = userRepo.getOne(userId);
         meal.setUser(user);
 
-        return crudRepository.save(meal);
+        return mealRepo.save(meal);
     }
 
     @Override
     public boolean delete(int id, int userId) {
-        return crudRepository.deleteByIdAndUserId(id, userId) > 0;
+        return mealRepo.deleteByIdAndUserId(id, userId) > 0;
     }
 
     @Override
     public Meal get(int id, int userId) {
-        return crudRepository.findByIdAndUserId(id, userId);
+        return mealRepo.findByIdAndUserId(id, userId);
     }
 
     @Override
     public List<Meal> getAll(int userId) {
-        return crudRepository.findByUserIdOrderByDateTimeDesc(userId);
+        return mealRepo.findByUserIdOrderByDateTimeDesc(userId);
     }
 
     @Override
     public List<Meal> getBetweenInclusive(LocalDate startDate, LocalDate endDate, int userId) {
-        return crudRepository.findByUserIdAndDateTimeGreaterThanEqualAndDateTimeLessThanOrderByDateTimeDesc(
+        return mealRepo.findByUserIdAndDateTimeGreaterThanEqualAndDateTimeLessThanOrderByDateTimeDesc(
                 userId, getStartInclusive(startDate), getEndExclusive(endDate)
         );
     }

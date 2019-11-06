@@ -204,8 +204,13 @@
             </dependencies>
             <activation>
                 <activeByDefault>true</activeByDefault>
+                <property>
+                    <name>spring.profiles.active</name>
+                    <value>postgres</value>
+                </property>
             </activation>
         </profile>
+
     </profiles>
 
     <dependencyManagement>
